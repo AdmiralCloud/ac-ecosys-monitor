@@ -1,0 +1,27 @@
+{
+  "name": "ac-ecosys-monitor",
+  "version": "1.0.0",
+  "description": "Real-time server and API monitoring dashboard",
+  "author": "Virginijus Digrys",
+  "license": "MIT",
+  "keywords": [
+    "monitoring",
+    "ping",
+    "api-health-check",
+    "dashboard"
+  ],
+  "main": "server-monitor.js",
+  "scripts": {
+    "start": "node server-monitor.js",
+    "dev": "node server-monitor.js",
+    "test": "node tests/server-monitor.test.js",
+    "test:watch": "nodemon tests/server-monitor.test.js"
+  },
+  "dependencies": {
+    "cli-table3": "^0.6.5",
+    "chalk": "^5.6.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
