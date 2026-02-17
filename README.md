@@ -2,6 +2,30 @@
 
 A real-time monitoring tool built with Node.js that checks server availability via ping and API calls, displaying results in a beautiful refreshing table format.
 
+## Output
+
+The dashboard displays:
+
+```
+┌─────────────────────────────────────────────┐
+│         SERVER MONITORING DASHBOARD         │
+├─────────────────────────────────────────────┤
+│ Uptime: 4/5 servers UP                      │
+│ Refresh: every 60s | Next check at 14:33:15 │
+└─────────────────────────────────────────────┘
+
+Server Name              Type      Target                              Status       Code     Last Check      Details
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Web Server 1            ping      8.8.8.8                             ✓ UP         ✓        14:32:15        -
+Web Server 2            ping      1.1.1.1                             ✓ UP         ✓        14:32:16        -
+API Server              api       https://api.github.com/repos/...    ✓ UP         200      14:32:17        -
+Health Check API        api       https://httpbin.org/status/200      ✓ UP         200      14:32:18        -
+Database Server         ping      8.8.4.4                             ✗ DOWN       ✗        14:32:19        Timeout
+
+Last updated: 14:32:19
+Press Ctrl+C to exit
+```
+
 ## Features
 
 - **Ping Monitoring**: Check server availability using ICMP ping
@@ -302,28 +326,6 @@ API Service         api    https://api.example.com/health  ✗ DOWN       N/A  1
 When response parsing fails:
 ```
 API Service         api    https://api.example.com/health  ⚠ UNHEALTHY  200  14:32:19  data.status: null (expected "ok")
-```
-
-## Output
-
-The dashboard displays:
-
-```
-┌─ SERVER MONITORING DASHBOARD ─┐
-│ Uptime: 5/5 servers UP
-│ Refresh: every 60s | Next check in 60s
-└────────────────────────────────┘
-
-Server Name              Type      Target                              Status       Code     Last Check      Error
-─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Web Server 1            ping      8.8.8.8                             ✓ UP         ✓        14:32:15        -
-Web Server 2            ping      1.1.1.1                             ✓ UP         ✓        14:32:16        -
-API Server              api       https://api.github.com/repos/...    ✓ UP         200      14:32:17        -
-Health Check API        api       https://httpbin.org/status/200      ✓ UP         200      14:32:18        -
-Database Server         ping      8.8.4.4                             ✗ DOWN       ✗        14:32:19        Timeout
-
-Last updated: 14:32:19
-Press Ctrl+C to exit
 ```
 
 ## Common Use Cases
