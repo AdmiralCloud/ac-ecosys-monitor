@@ -6,7 +6,7 @@
  * Displays results in a refreshing table format
  */
 
-const { spawn, exec } = require('child_process');
+const { spawn, exec } = require('node:child_process');
 const https = require('node:https');
 const http = require('node:http');
 const { promisify } = require('node:util');
@@ -17,7 +17,10 @@ const { Chalk } = require('chalk');
 const config = require('./config');
 
 const execPromise = promisify(exec);
+const isLinux = require('node:os').type() === 'Linux';
 const chalk = new Chalk()
+
+const PING_IN_MILLISECONDS = isLinux ? 1000 : 1 // linux ping is in seconds
 
 class ServerMonitor {
   constructor(config) {
@@ -31,13 +34,12 @@ class ServerMonitor {
     return (date !== undefined ? new Date(date) : new Date()).toLocaleTimeString(undefined, { hour12: false })
   }
 
-
   /**
    * Perform a ping to check server availability
    */
   async ping(target, timeout) {
     try {
-      const command = `ping -c 1 -W ${Math.floor(timeout / 1000)} ${target}`;
+      const command = `ping -c 1 -W ${Math.floor(timeout / PING_IN_MILLISECONDS)} ${target}`;
       const { stdout, stderr } = await execPromise(command, { timeout });
 
       // Check if ping was successful
